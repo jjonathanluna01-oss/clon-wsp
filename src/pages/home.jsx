@@ -1,11 +1,13 @@
 import Sidebar from "../components/Sidebar";
+import logo from "../assets/logoo.png";
 
 function Home() {
     return (
         <div className="app">
             <Sidebar />
             <div className="chat-placeholder">
-                <h2>Seleccioná un chat</h2>
+                <img src={logo} alt="FlowMessageLine" />
+                <p>Seleccioná un chat para empezar</p>
             </div>
         </div>
     );

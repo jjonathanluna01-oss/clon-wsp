@@ -1,9 +1,10 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useParams } from "react-router-dom";
 import { useChat } from "../context/ChatContext";
 
 function Sidebar() {
     const { chats } = useChat();
     const [searchParams, setSearchParams] = useSearchParams();
+    const { id: activeId } = useParams();
     const search = searchParams.get("search") || "";
 
     const handleSearch = (e) => {
@@ -26,7 +27,7 @@ function Sidebar() {
             <form onSubmit={(e) => e.preventDefault()} className="search-form">
                 <input
                     type="text"
-                    placeholder="Buscar chat..."
+                    placeholder="Buscar o iniciar un nuevo chat"
                     value={search}
                     onChange={handleSearch}
                     className="search-input"
@@ -38,7 +39,7 @@ function Sidebar() {
                     <Link
                         key={chat.id}
                         to={`/chat/${chat.id}`}
-                        className="chat-item"
+                        className={`chat-item ${activeId === chat.id ? "active" : ""}`}
                     >
                         <img src={chat.avatar} alt={chat.name} className="avatar" />
                         {chat.name}

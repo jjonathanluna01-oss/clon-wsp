@@ -2,6 +2,58 @@ import { createContext, useContext, useState } from "react";
 
 const ChatContext = createContext();
 
+const autoReplies = {
+    "1": [
+        "¡Hola! Acá Messi. Estoy entrenando para el próximo partido ⚽",
+        "La pelota siempre al piso, como me enseñó Guardiola 🎯",
+        "Gracias por el mensaje! Vamos Argentina! 🇦🇷",
+        "Estoy con la familia, pero te respondo enseguida 😊",
+        "El fútbol es mi vida, qué querés que te diga 🐐",
+    ],
+    "2": [
+        "¡Pibe! ¿Cómo andás? La mano de Dios siempre presente ✋",
+        "El fútbol hay que jugarlo con el corazón, no con la cabeza 💙",
+        "Napoli, Boca, Argentina... amor eterno ❤️",
+        "¡Soy el mejor que hubo, hay y habrá! 🌟",
+        "Acordate: el mejor de todos los tiempos soy yo 😄",
+    ],
+    "3": [
+        "¡Hola! Todo bien por acá 😊",
+        "Dale, nos vemos pronto!",
+        "Jaja sí, tenés razón 👍",
+        "Qué bueno escucharte!",
+        "Te mando un saludo grande 🤗",
+    ],
+    "4": [
+        "Hola! Cómo te va? 👋",
+        "Sí, claro! Cuando quieras hablamos",
+        "Genial, gracias por avisar!",
+        "Ok, entendido 👌",
+        "Nos ponemos de acuerdo después!",
+    ],
+    "5": [
+        "¡Hola! ¿Todo bien? 💕",
+        "Ay qué lindo que me escribas! 😊",
+        "Sí, re de acuerdo contigo!",
+        "Jaja me hiciste reír 😂",
+        "Buenísimo, me alegra mucho!",
+    ],
+    "6": [
+        "Eyyy qué hacés! 🤙",
+        "Todo tranqui por acá",
+        "Dale, re copado",
+        "Jaja sí bro 😄",
+        "Ok ok, entendido!",
+    ],
+    "7": [
+        "Hola! 🌸 ¿Cómo estás?",
+        "Qué bueno saber de vos!",
+        "Sí, totalmente de acuerdo ✨",
+        "Jaja me alegró el día 😊",
+        "Un abrazo grande! 🤗",
+    ],
+};
+
 export function ChatProvider({ children }) {
     const [chats] = useState([
         {
@@ -45,6 +97,10 @@ export function ChatProvider({ children }) {
         Object.fromEntries(["1", "2", "3", "4", "5", "6", "7"].map((id) => [id, []]))
     );
 
+    const [replyIndex, setReplyIndex] = useState(
+        Object.fromEntries(["1", "2", "3", "4", "5", "6", "7"].map((id) => [id, 0]))
+    );
+
     const sendMessage = (chatId, text) => {
         if (text.trim() === "") return;
 
@@ -59,10 +115,14 @@ export function ChatProvider({ children }) {
             [chatId]: [...prev[chatId], newMessage],
         }));
 
-        // Respuesta automática
+        // Respuesta personalizada
         setTimeout(() => {
+            const replies = autoReplies[chatId];
+            const index = replyIndex[chatId] % replies.length;
+            const reply = replies[index];
+
             const autoReply = {
-                text: "Estoy respondiendo automáticamente 🤖",
+                text: reply,
                 sender: "other",
                 time: new Date().toLocaleTimeString(),
             };
@@ -70,6 +130,11 @@ export function ChatProvider({ children }) {
             setMessages((prev) => ({
                 ...prev,
                 [chatId]: [...prev[chatId], autoReply],
+            }));
+
+            setReplyIndex((prev) => ({
+                ...prev,
+                [chatId]: prev[chatId] + 1,
             }));
         }, 1000);
     };
