@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from "react-router-dom";
-import { useChat } from "../context/chatcontext";
+import { useChat } from "../context/ChatContext";
 
 function Sidebar() {
     const { chats } = useChat();
