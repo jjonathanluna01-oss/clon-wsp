@@ -8,12 +8,11 @@ function ChatPage() {
     const { chats, messages, sendMessage } = useChat();
     const [text, setText] = useState("");
 
-    const chatId = Number(id);
-    const activeChat = chats.find((chat) => chat.id === chatId);
+    const activeChat = chats.find((chat) => String(chat.id) === id);
 
     const handleSend = (e) => {
         e.preventDefault();
-        sendMessage(chatId, text);
+        sendMessage(id, text);
         setText("");
     };
 
@@ -35,8 +34,9 @@ function ChatPage() {
                         </div>
                     </div>
                 </div>
+
                 <div className="messages">
-                    {messages[chatId]?.map((msg, index) => (
+                    {messages[id]?.map((msg, index) => (
                         <div
                             key={index}
                             className={
