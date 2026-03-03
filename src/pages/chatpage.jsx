@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useChat } from "../context/ChatContext";
-import Sidebar from "../components/Sidebar";
+import { useChat } from "../context/chatcontext";
+import Sidebar from "../components/sidebar";
 import { useState } from "react";
 
 function ChatPage() {
