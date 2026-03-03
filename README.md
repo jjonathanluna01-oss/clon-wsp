@@ -10,15 +10,10 @@ FlowMessageLine es un clon de WhatsApp desarrollado con React como proyecto fina
 
 [Ver proyecto en Vercel](#) (https://clon-wsp-tau.vercel.app)
 
----
 
-## 📸 Capturas
 
-| Login | Chats | Conversación |
-|-------|-------|--------------|
-| ![Login](./public/screenshots/login.png) | ![Home](./public/screenshots/home.png) | ![Chat](./public/screenshots/chat.png) |
 
----
+
 
 ## ✨ Funcionalidades
 
