@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logoo.png";
 
 function Login() {
     const [nombre, setNombre] = useState("");
@@ -26,7 +27,7 @@ function Login() {
             return;
         }
         sessionStorage.setItem("user", JSON.stringify({ nombre, telefono }));
-        navigate("/home");;
+        navigate("/home");
     };
 
     return (
@@ -35,7 +36,7 @@ function Login() {
 
                 {/* Logo */}
                 <div className="login-logo-wrapper">
-                    <img src="/src/assets/logoo.png" alt="FlowMessageLine" className="login-logo-img" />
+               <img src={logo} alt="FlowMessageLine" className="login-logo-img" />
                     <p className="login-subtitle">Ingresá tus datos para continuar</p>
                 </div>
 
