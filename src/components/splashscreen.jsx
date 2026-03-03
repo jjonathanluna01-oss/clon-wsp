@@ -39,4 +39,4 @@ function SplashScreen({ onFinish }) {
     );
 }
 
-export default splashscreen;
+export default SplashScreen;
