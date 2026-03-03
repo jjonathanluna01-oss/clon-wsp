@@ -181,7 +181,6 @@ body {
         opacity: 0;
         transform: translateY(5px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -444,11 +443,35 @@ body {
 }
 
 /* ==================
+   BACK BUTTON - solo mobile
+   ================== */
+.back-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #a89fd0;
+    padding: 4px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+    flex-shrink: 0;
+}
+
+.back-btn:hover {
+    color: #00b4d8;
+}
+
+/* ==================
    RESPONSIVE
    ================== */
 
 /* TABLET (768px) */
 @media (max-width: 768px) {
+    .back-btn {
+        display: flex;
+    }
 
     /* En mobile el sidebar ocupa toda la pantalla (lista de chats) */
     .app {

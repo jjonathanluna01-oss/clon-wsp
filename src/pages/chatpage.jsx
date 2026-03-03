@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useChat } from "../context/chatcontext";
 import Sidebar from "../components/sidebar";
 import { useState } from "react";
@@ -7,6 +7,7 @@ function ChatPage() {
     const { id } = useParams();
     const { chats, messages, sendMessage } = useChat();
     const [text, setText] = useState("");
+    const navigate = useNavigate();
 
     const activeChat = chats.find((chat) => String(chat.id) === id);
 
@@ -23,6 +24,16 @@ function ChatPage() {
             <div className="chat-container">
                 <div className="header">
                     <div className="header-content">
+                        {/* Botón volver - solo visible en mobile */}
+                        <button
+                            className="back-btn"
+                            onClick={() => navigate("/home")}
+                        >
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                            </svg>
+                        </button>
+
                         <img
                             src={activeChat?.avatar}
                             alt="avatar"
