@@ -7,6 +7,18 @@ function Sidebar() {
     const { id: activeId } = useParams();
     const search = searchParams.get("search") || "";
 
+    // Leer usuario del sessionStorage
+    const userRaw = sessionStorage.getItem("user");
+    const user = userRaw ? JSON.parse(userRaw) : { nombre: "Usuario", telefono: "" };
+
+    // Iniciales del nombre para el avatar
+    const initials = user.nombre
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2);
+
     const handleSearch = (e) => {
         const value = e.target.value;
         if (value) {
@@ -22,7 +34,14 @@ function Sidebar() {
 
     return (
         <div className="sidebar">
-            <h2>Chats</h2>
+            {/* Header del usuario */}
+            <div className="sidebar-user">
+                <div className="sidebar-user-avatar">{initials}</div>
+                <div className="sidebar-user-info">
+                    <span className="sidebar-user-name">{user.nombre}</span>
+                    <span className="sidebar-user-phone">{user.telefono}</span>
+                </div>
+            </div>
 
             <form onSubmit={(e) => e.preventDefault()} className="search-form">
                 <input
